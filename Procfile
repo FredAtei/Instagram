@@ -1,0 +1,1 @@
+web: gunicorn Instaset.wsgi --log-file -
