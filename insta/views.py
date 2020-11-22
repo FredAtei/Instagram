@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models  import Profile
+from .models  import Profile,Image
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import NewPostForm
@@ -8,7 +8,9 @@ from .forms import NewPostForm
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    return render(request, 'profile/index.html')
+    posts = Image.get_images()
+    current_user = request.user
+    return render(request, "profile/index.html",{'posts':posts, 'user':current_user})
 
 def post(request):
     current_user = request.user
